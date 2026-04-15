@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task1 – Scroll Navbar</title>
+
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="body.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <a href="#home" class="logo">Task 1</a>
+
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul id="nav-links">
+      <li><a href="#home"     class="nav-link" data-section="home">Home</a></li>
+      <li><a href="#about"    class="nav-link" data-section="about">About</a></li>
+      <li><a href="#services" class="nav-link" data-section="services">Services</a></li>
+      <li><a href="#contact"  class="nav-link" data-section="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== SECTIONS ===== -->
+
+  <!-- HOME -->
+  <section id="home" class="full-section section-home">
+    <div class="glass-card">
+      <h1 class="section-title">Home</h1>
+      <p class="section-desc">
+        Welcome to the Home page, this is my first task in the Skill Craft internship proram.
+        I have made a scrollable web page with a interactive navbar that highlights the current section as you scroll through it.
+        The navbar also has a hamburger menu for mobile devices.
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="full-section section-about">
+    <div class="glass-card">
+      <h1 class="section-title">About</h1>
+      <p class="section-desc">
+      Details about the sites purpose and company details, are shown here 
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="full-section section-services">
+    <div class="glass-card">
+      <h1 class="section-title">Services</h1>
+      <p class="section-desc">
+        The services provided by the company are listed here 
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="full-section section-contact">
+    <div class="glass-card">
+      <h1 class="section-title">Contact</h1>
+      <p class="section-desc">
+        The contact info of the company is listed here,
+
+        for example my email is kennmachado14@gmail.com
+      </p>
+    </div>
+  </section>
+
+  <script src="logic.js"></script>
+</body>
+</html>

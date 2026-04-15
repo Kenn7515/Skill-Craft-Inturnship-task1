@@ -1,0 +1,322 @@
+/* ============================================================
+   TASK1 – body.css
+   Scroll Navbar + Glassmorphism Sections
+   ============================================================ */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --font-display : 'Syne', sans-serif;
+  --font-body    : 'DM Sans', sans-serif;
+
+  /* Navbar */
+  --nav-height   : 68px;
+  --nav-bg-scroll: rgba(8, 8, 18, 0.88);
+
+  /* Glass card */
+  --glass-bg     : rgba(255, 255, 255, 0.08);
+  --glass-border : rgba(255, 255, 255, 0.18);
+  --glass-blur   : 18px;
+  --glass-radius : 20px;
+
+  /* Transitions */
+  --transition   : 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Smooth scroll for anchor links */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  transition: background var(--transition), backdrop-filter var(--transition),
+              box-shadow var(--transition);
+  z-index: 1000;
+}
+
+/* Scrolled state */
+#navbar.scrolled {
+  background: var(--nav-bg-scroll);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+}
+
+/* Logo */
+#navbar .logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  /* subtle gradient shimmer on the logo */
+  background: linear-gradient(135deg, #fff 40%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: opacity var(--transition);
+}
+#navbar .logo:hover { opacity: 0.8; }
+
+/* Nav links list */
+#navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+/* Individual nav link */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  border-radius: 30px;
+  transition: color var(--transition), background var(--transition);
+  letter-spacing: 0.3px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: #a78bfa;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.nav-link:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.07);
+}
+.nav-link:hover::after   { transform: scaleX(1); }
+
+/* Active link highlight */
+.nav-link.active {
+  color: #fff;
+  background: rgba(167, 139, 250, 0.15);
+}
+.nav-link.active::after { transform: scaleX(1); }
+
+/* ============================================================
+   HAMBURGER (mobile)
+   ============================================================ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1100;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Animated X state */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   FULL-SCREEN SECTIONS
+   ============================================================ */
+.full-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-height) + 40px) 24px 60px;
+  text-align: center;
+}
+
+/* ---- Section Gradient Themes ---- */
+
+/* Home → blue / purple */
+.section-home {
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(99, 102, 241, 0.55) 0%, transparent 65%),
+    radial-gradient(ellipse at 80% 70%, rgba(167, 139, 250, 0.4) 0%, transparent 60%),
+    linear-gradient(160deg, #0a0a1a 0%, #12123a 50%, #1e0a3c 100%);
+}
+
+/* About → green / teal */
+.section-about {
+  background:
+    radial-gradient(ellipse at 15% 60%, rgba(20, 184, 166, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 25%, rgba(52, 211, 153, 0.35) 0%, transparent 55%),
+    linear-gradient(150deg, #011a12 0%, #022c1e 50%, #04403a 100%);
+}
+
+/* Services → orange / red */
+.section-services {
+  background:
+    radial-gradient(ellipse at 25% 40%, rgba(249, 115, 22, 0.55) 0%, transparent 65%),
+    radial-gradient(ellipse at 75% 65%, rgba(239, 68, 68, 0.4) 0%, transparent 60%),
+    linear-gradient(155deg, #1a0500 0%, #2d0b00 50%, #3d0808 100%);
+}
+
+/* Contact → dark elegant */
+.section-contact {
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(148, 163, 184, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 30%, rgba(100, 116, 139, 0.2) 0%, transparent 55%),
+    linear-gradient(160deg, #060609 0%, #0d0d18 50%, #111118 100%);
+}
+
+/* ============================================================
+   GLASSMORPHISM CARD
+   ============================================================ */
+.glass-card {
+  position: relative;
+  max-width: 660px;
+  width: 100%;
+  padding: 56px 52px;
+  border-radius: var(--glass-radius);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+
+  /* Soft glow ring on the card */
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  /* Text sits above the blur pseudo-element via stacking context */
+  z-index: 1;
+
+  /* Entrance animation */
+  animation: cardFadeUp 0.7s var(--transition) both;
+}
+
+@keyframes cardFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Card Content ---------- */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 22px;
+  /* Subtle text shadow for depth above glass */
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 2; /* explicitly above glass backdrop */
+}
+
+.section-desc {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.72);
+  position: relative;
+  z-index: 2;
+}
+
+.section-desc em {
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ============================================================
+   RESPONSIVE – Mobile
+   ============================================================ */
+@media (max-width: 768px) {
+
+  #navbar {
+    padding: 0 20px;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide nav links by default on mobile */
+  #nav-links {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 18, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+    z-index: 1050;
+  }
+
+  #nav-links.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-link {
+    font-size: 1.4rem;
+    padding: 10px 24px;
+  }
+
+  .glass-card {
+    padding: 40px 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-card {
+    padding: 32px 20px;
+  }
+}
